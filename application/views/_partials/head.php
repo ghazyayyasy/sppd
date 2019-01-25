@@ -1,7 +1,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SIPD</title>
-  <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/icon_image/surat2.png')?>" />
+  
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assets')?>/dist/css/skins/_all-skins.min.css">
     <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets')?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
+  <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/icon_image/surat2.png')?>"/>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

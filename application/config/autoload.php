@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'tgl_indo', 'nominal');
+$autoload['helper'] = array('url', 'tgl_indo', 'nominal', 'form');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('LoginModel');
+$autoload['model'] = array('LoginModel', 'DashboardModel', 'PegawaiModel');
