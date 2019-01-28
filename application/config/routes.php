@@ -58,3 +58,5 @@ $route['welcome'] = 'Welcome';
 $route['dashboard/(:any)'] = 'DashboardController/$1';
 $route['pegawai/(:any)'] = 'PegawaiController/$1';
 $route['pegawai/(:any)/(:any)'] = 'PegawaiController/$1/$2';
+$route['gp/(:any)'] = 'GPController/$1';
+$route['gp/(:any)/(:any)'] = 'GPController/$1/$2';

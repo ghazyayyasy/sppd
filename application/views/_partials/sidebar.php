@@ -16,15 +16,17 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="<?php echo base_url('dashboard/index')?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li class="treeview menu">
+        <li class="active treeview menu-open">
           <a href="#">
-            <i class="fa fa-book"></i> <span>Data SPPD</span>
+            <i class="fa fa-book"></i> <span>Data Utama</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('pegawai/index')?>"><i class="fa fa-circle-o"></i> Data Pegawai</a></li>
+            <li><a href="<?php echo base_url('gp/index')?>"><i class="fa fa-circle-o"></i> Data Golongan</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
@@ -36,3 +38,14 @@
       </ul>
     </section>
     <!-- /.sidebar -->
+    <script>
+
+        var url = window.location;
+// Will only work if string in href matches with location
+$('.treeview-menu a[href="'+ url +'"]').parent().addClass('active');
+
+// Will also work for relative and absolute hrefs
+$('.treeview-menu a').filter(function() {
+    return this.href == url;
+}).parent().addClass('active');
+    </script>

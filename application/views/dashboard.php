@@ -76,7 +76,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Umum</h3>
+              <h3 class="box-title">Data SPPD</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -89,7 +89,6 @@
                   <th>Tanggal Pulang</th>
                   <th>Maksud</th>
                   <th>Kota Tujuan</th>
-                  <th>Biaya Transportasi</th>
                   <th>Status</th>
                 </tr>
                 </thead>
@@ -105,7 +104,6 @@
                       <td><?=date_indo($s->tgl_berakhir)?></td>
                       <td><?=$s->maksud?></td>
                       <td><?=$s->rute?></td>
-                      <td style="text-align: right">Rp <?php $total = $s->biaya_pergi + $s->biaya_pulang; echo number_format($total, 0, '', '.')?></td>
                       <td style="text-align: center;">
                       <?php
                       if ($s->status == 'Selesai') {

@@ -20,11 +20,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Pegawai
+        Data Golongan Pegawai
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Pegawai</li>
+        <li class="active">Data Golongan Pegawai</li>
       </ol>
     </section>
 
@@ -42,50 +42,20 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                      <h4 class="modal-title">Tambah Data Pegawai</h4>
+                      <h4 class="modal-title">Tambah Data Golongan</h4>
                     </div>
                     <div class="modal-body">
-                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/TambahPegawai')?>">
+                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('gp/TambahGP')?>">
                         <div class="form-group">
-                          <label class="col-lg-3 col-sm-3 control-label">NIP</label>
+                          <label class="col-lg-3 col-sm-3 control-label">Nama GP</label>
                           <div class="col-lg-9">
-                            <input type="text" name="NIP" id="NIP" class="form-control" placeholder="NIP" required>
+                            <input type="text" name="namaGP" id="namaGP" class="form-control" placeholder="Nama GP" required>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-lg-3 col-sm-3 control-label">Nama Pegawai</label>
+                          <label class="col-lg-3 col-sm-3 control-label">Tarif</label>
                           <div class="col-lg-9">
-                            <input type="text" name="namaPegawai" id="namaPegawai" class="form-control" placeholder="Nama Pegawai" required>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
-                          <div class="col-lg-9">
-                            <select name="idJabatan" id="idJabatan" class="form-control" required>
-                              <option>- Pilih Jabatan -</option>
-                              <?php
-                              foreach ($jabatan as $d) {
-                              ?>
-                              <option value="<?=$d->id_jabatan?>"><?=$d->nama_jabatan?></option>
-                              <?php
-                              }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-lg-3 col-sm-3 control-label">GP</label>
-                          <div class="col-lg-9">
-                            <select name="idGP" id="idGP" class="form-control" required>
-                              <option>- Pilih GP -</option>
-                              <?php
-                              foreach ($gp as $d) {
-                              ?>
-                              <option value="<?=$d->id_gp?>"><?=$d->nama_gp?></option>
-                              <?php
-                              }
-                              ?>
-                            </select>
+                            <input type="text" name="tarif" id="tarif" class="form-control" placeholder="Tarif" required>
                           </div>
                         </div>
                         <div class="form-group">
@@ -99,11 +69,11 @@
                 </div>
               </div>
               <?php
-              if ($this->session->flashdata('message')) {
+              if ($this->session->flashdata('pesan')) {
               ?>
               <div class="alert alert-success clearfix">
                 <div class="noti-info">
-                  <a href="#"><?=$this->session->flashdata('message')?></a>
+                  <a href="#"><?=$this->session->flashdata('pesan')?></a>
                 </div>
               </div>
               <?php
@@ -118,29 +88,25 @@
                       <thead>
                         <tr>
                           <th width="10%">No</th>
-                          <th>NIP</th>
-                          <th>Nama Pegawai</th>
-                          <th>Jabatan</th>
-                          <th>Golongan</th>
-                          <th width="20%">Action</th>
+                          <th>Nama GP</th>
+                          <th>Tarif</th>
+                          <th width="20%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         $no = 1;
-                        foreach ($pegawai as $d) {
+                        foreach ($data as $d) {
                         ?>
                         <tr>
                           <td><?=$no++?></td>
-                          <td><?=$d->nip?></td>
-                          <td><?=$d->nama_pegawai?></td>
-                          <td><?=$d->nama_jabatan?></td>
                           <td><?=$d->nama_gp?></td>
+                          <td>Rp <?=number_format($d->tarif, 0, '', '.')?>,-</td>
                           <td style="text-align: center">
-                            <a href="#modalEditData<?=$d->nip?>" data-toggle="modal" class="btn btn-warning btn-sm">
+                            <a href="#modalEditData<?=$d->id_gp?>" data-toggle="modal" class="btn btn-warning btn-sm">
                               <i class="fa fa-edit"></i> Edit
                             </a>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="hapusData('<?=$d->nip?>')"><i class="fa fa-trash-o"></i> Hapus</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="hapusData('<?=$d->id_gp?>')"><i class="fa fa-trash-o"></i> Hapus</button>
                           </td>
                         </tr>
                         <?php
@@ -149,73 +115,27 @@
                       </tbody>
                     </table>
                     <?php
-                    foreach ($pegawai as $d) {
+                    foreach ($data as $d) {
                     ?>
-                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modalEditData<?=$d->nip?>" class="modal fade">
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modalEditData<?=$d->id_gp?>" class="modal fade">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                <h4 class="modal-title">Edit Data Pegawai</h4>
+                                <h4 class="modal-title">Edit Data Golongan</h4>
                               </div>
                               <div class="modal-body">
-                                <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
+                                <form class="form-horizontal" role="form" method="post" action="<?=base_url('gp/EditGP/'.$d->id_gp)?>">
                                   <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">NIP</label>
+                                    <label class="col-lg-3 col-sm-3 control-label">Nama GP</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="NIP" id="NIP" class="form-control" placeholder="NIP" value="<?=$d->nip?>" required>
+                                      <input type="text" name="namaGP" id="namaGP" class="form-control" placeholder="Nama GP" value="<?=$d->nama_gp?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Nama Pegawai</label>
+                                    <label class="col-lg-3 col-sm-3 control-label">Tarif</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="namaPegawai" id="namaPegawai" class="form-control" placeholder="Nama Pegawai" value="<?=$d->nama_pegawai?>" required>
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
-                                    <div class="col-lg-9">
-                                      <select name="idJabatan" id="idJabatan" class="form-control" required>
-                                        <option>- Pilih Jabatan -</option>
-                                        <?php
-                                        foreach ($jabatan as $p) {
-                                          if ($d->id_jabatan == $p->id_jabatan) {
-                                          ?>
-                                          <option value="<?=$p->id_jabatan?>" selected><?=$p->nama_jabatan?></option>
-                                          <?php
-                                          } else {
-                                          ?>
-                                          <option value="<?=$p->id_jabatan?>"><?=$p->nama_jabatan?></option>
-                                          <?php
-                                          }
-                                        ?>
-                                        <?php
-                                        }
-                                        ?>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">GP</label>
-                                    <div class="col-lg-9">
-                                      <select name="idGP" id="idGP" class="form-control" required>
-                                        <option>- Pilih GP -</option>
-                                        <?php
-                                        foreach ($gp as $g) {
-                                          if ($d->id_gp == $g->id_gp) {
-                                          ?>
-                                          <option value="<?=$g->id_gp?>" selected><?=$g->nama_gp?></option>
-                                          <?php
-                                          } else {
-                                          ?>
-                                          <option value="<?=$g->id_gp?>"><?=$g->nama_gp?></option>
-                                          <?php
-                                          }
-                                        ?>
-                                        <?php
-                                        }
-                                        ?>
-                                      </select>
+                                      <input type="text" name="tarif" id="tarif" class="form-control" placeholder="Tarif" value="<?=$d->tarif?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
@@ -306,15 +226,15 @@
 
 </script>
 <script>
-      function hapusData(id) {
+     function hapusData(id) {
         $.ajax({
-          url     : "<?=base_url()?>pegawai/AjaxPegawai",
+          url     : "<?=base_url()?>gp/AjaxGP",
           method  : "post",
           data    : {id:id},
           success : function(data) {
             swal({
               title               : "Apakah Anda Yakin?",
-              text                : 'Anda Ingin Menghapus Pegawai "'+data+'"?',
+              text                : 'Anda Ingin Menghapus Golongan "'+data+'"?',
               type                : "warning",
               showCancelButton    : true,
               confirmButtonColor  : "#DD6B55",
@@ -332,7 +252,7 @@
                   type              : "success",
                   showConfirmButton : false
                 }, function () {
-                  window.location.href = "<?=base_url()?>pegawai/HapusPegawai/"+id;
+                  window.location.href = "<?=base_url()?>gp/HapusGP/"+id;
                 });
               }
             });
@@ -340,30 +260,6 @@
         });
       }
 </script>
-<!-- <script type="text/javascript">
-$('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
-    var form_data = {
-        NIP: $('#NIP').val(),
-        namaPegawai: $('#namaPegawai').val(),
-        idJabatan: $('#idJabatan').val(),
-        idGP: $('#idGP').val()
-    };
-    $.ajax({
-        url: "<?php //echo base_url('pegawai/tambahPegawai'); ?>",
-        type: 'POST',
-        data: form_data,
-        success: function(msg) {
-            // if (msg == 'YES')
-            //     $('#alert-msg').html('<div class="alert alert-success text-center">Your mail has been sent successfully!</div>');
-            // else if (msg == 'NO')
-            //     $('#alert-msg').html('<div class="alert alert-danger text-center">Error in sending your message! Please try again later.</div>');
-            // else
-                $('#alert-msg').html('<div class="alert alert-danger">' + msg + '</div>');
-        }
-    });
-    return false;
-});
-</script> -->
 
 </body>
 </html>
