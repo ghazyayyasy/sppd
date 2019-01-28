@@ -66,7 +66,7 @@
                               <?php
                               foreach ($jabatan as $d) {
                               ?>
-                              <option value="<?=$d->id_jabatan?>"><?=$d->nama_profesi?></option>
+                              <option value="<?=$d->id_jabatan?>"><?=$d->nama_jabatan?></option>
                               <?php
                               }
                               ?>
@@ -134,7 +134,7 @@
                           <td><?=$no++?></td>
                           <td><?=$d->nip?></td>
                           <td><?=$d->nama_pegawai?></td>
-                          <td><?=$d->nama_profesi?></td>
+                          <td><?=$d->nama_jabatan?></td>
                           <td><?=$d->nama_gp?></td>
                           <td style="text-align: center">
                             <a href="#modalEditData<?=$d->nip?>" data-toggle="modal" class="btn btn-warning btn-sm">
@@ -181,11 +181,11 @@
                                         foreach ($jabatan as $p) {
                                           if ($d->id_jabatan == $p->id_jabatan) {
                                           ?>
-                                          <option value="<?=$p->id_jabatan?>" selected><?=$p->nama_profesi?></option>
+                                          <option value="<?=$p->id_jabatan?>" selected><?=$p->nama_jabatan?></option>
                                           <?php
                                           } else {
                                           ?>
-                                          <option value="<?=$p->id_jabatan?>"><?=$p->nama_profesi?></option>
+                                          <option value="<?=$p->id_jabatan?>"><?=$p->nama_jabatan?></option>
                                           <?php
                                           }
                                         ?>

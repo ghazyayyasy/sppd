@@ -9,7 +9,7 @@ class JabatanModel extends CI_Model
 	}
 
 	function ambilDataJabatanUrutNama() {
-		$this->db->order_by('nama_profesi', 'asc');
+		$this->db->order_by('nama_jabatan', 'asc');
 		return $this->db->get('jabatan');
 	}
 
