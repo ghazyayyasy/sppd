@@ -26,8 +26,8 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url('pegawai/index')?>"><i class="fa fa-circle-o"></i> Data Pegawai</a></li>
             <li><a href="<?php echo base_url('gp/index')?>"><i class="fa fa-circle-o"></i> Data Golongan</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="<?php echo base_url('jabatan/index')?>"><i class="fa fa-circle-o"></i> Data Jabatan</a></li>
+            <li><a href="<?php echo base_url('transportasi/index')?>"><i class="fa fa-circle-o"></i> Data Transportasi</a></li>
           </ul>
         </li>
         <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>

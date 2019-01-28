@@ -60,3 +60,7 @@ $route['pegawai/(:any)'] = 'PegawaiController/$1';
 $route['pegawai/(:any)/(:any)'] = 'PegawaiController/$1/$2';
 $route['gp/(:any)'] = 'GPController/$1';
 $route['gp/(:any)/(:any)'] = 'GPController/$1/$2';
+$route['jabatan/(:any)'] = 'JabatanController/$1';
+$route['jabatan/(:any)/(:any)'] = 'JabatanController/$1/$2';
+$route['transportasi/(:any)'] = 'TransportasiController/$1';
+$route['transportasi/(:any)/(:any)'] = 'TransportasiController/$1/$2';
