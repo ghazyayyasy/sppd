@@ -4,9 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class TransportasiModel extends CI_Model 
 {
 
-	function ambilDataJabatan() {
-		return $this->db->get('jabatan');
-	}
 
 	function ambilDataTransportasi() {
 		$this->db->order_by('nama_transportasi', 'asc');
