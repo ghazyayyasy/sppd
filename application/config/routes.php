@@ -57,3 +57,4 @@ $route['login/(:any)'] = 'LoginController/$1';
 $route['welcome'] = 'Welcome';
 $route['dashboard/(:any)'] = 'DashboardController/$1';
 $route['pegawai/(:any)'] = 'PegawaiController/$1';
+$route['pegawai/(:any)/(:any)'] = 'PegawaiController/$1/$2';

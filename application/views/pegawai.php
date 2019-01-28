@@ -30,25 +30,13 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
+    <div class="row">
             <div class="col-sm-12">
               <div class="panel-body">
                 <a href="#modalTambahData" data-toggle="modal" class="btn btn-primary">
                   <i class="fa fa-plus"></i> Tambah Data
                 </a>
-                <?php
-              if ($this->session->flashdata('message')) {
-              ?>
-              <div class="alert alert-success clearfix">
-                <div class="noti-info">
-                  <a href="#"><?=$this->session->flashdata('message')?></a>
-                </div>
               </div>
-              <?php
-              }
-              ?>
-              </div>
-              <?php //echo validation_errors(); ?>
               <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modalTambahData" class="modal fade">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -57,7 +45,7 @@
                       <h4 class="modal-title">Tambah Data Pegawai</h4>
                     </div>
                     <div class="modal-body">
-                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/tambahPegawai')?>">
+                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/TambahPegawai')?>">
                         <div class="form-group">
                           <label class="col-lg-3 col-sm-3 control-label">NIP</label>
                           <div class="col-lg-9">
@@ -100,10 +88,9 @@
                             </select>
                           </div>
                         </div>
-                        <div id="alert-msg"></div>
                         <div class="form-group">
                           <div class="col-lg-offset-3 col-lg-9">
-                            <button type="submit" id="addButton" class="btn btn-primary" name="tambah" value="tambah">Kirim</button>
+                            <button type="submit" class="btn btn-primary" name="tambah" value="tambah">Kirim</button>
                           </div>
                         </div>
                       </form>
@@ -111,11 +98,21 @@
                   </div>
                 </div>
               </div>
-
+              <?php
+              if ($this->session->flashdata('message')) {
+              ?>
+              <div class="alert alert-success clearfix">
+                <div class="noti-info">
+                  <a href="#"><?=$this->session->flashdata('message')?></a>
+                </div>
+              </div>
+              <?php
+              }
+              ?>
             </div>
             <div class="col-sm-12">
-              <section class="box">
-                <div class="box-body">
+              <section class="panel">
+                <div class="panel-body">
                   <div class="adv-table">
                     <table class="display table table-bordered table-striped" id="dynamic-table">
                       <thead>
@@ -124,8 +121,8 @@
                           <th>NIP</th>
                           <th>Nama Pegawai</th>
                           <th>Jabatan</th>
-                          <th>GP</th>
-                          <th width="20%"><center>Action</center></th>
+                          <th>Golongan</th>
+                          <th width="20%">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -159,10 +156,10 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                <h4 class="modal-title">Edit Data Master Pegawai</h4>
+                                <h4 class="modal-title">Edit Data Pegawai</h4>
                               </div>
                               <div class="modal-body">
-                                <form class="form-horizontal" role="form" method="post" action="<?=base_url('Admin/EditPegawai/'.$d->nip)?>">
+                                <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">NIP</label>
                                     <div class="col-lg-9">
@@ -176,19 +173,19 @@
                                     </div>
                                   </div>
                                   <div class="form-group">
-                                    <label class="col-lg-3 col-sm-3 control-label">Profesi</label>
+                                    <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
                                     <div class="col-lg-9">
-                                      <select name="idProfesi" id="idProfesi" class="form-control" required>
-                                        <option>- Pilih Profesi -</option>
+                                      <select name="idJabatan" id="idJabatan" class="form-control" required>
+                                        <option>- Pilih Jabatan -</option>
                                         <?php
-                                        foreach ($profesi as $p) {
-                                          if ($d->id_profesi == $p->id_profesi) {
+                                        foreach ($jabatan as $p) {
+                                          if ($d->id_jabatan == $p->id_jabatan) {
                                           ?>
-                                          <option value="<?=$p->id_profesi?>" selected><?=$p->nama_profesi?></option>
+                                          <option value="<?=$p->id_jabatan?>" selected><?=$p->nama_profesi?></option>
                                           <?php
                                           } else {
                                           ?>
-                                          <option value="<?=$p->id_profesi?>"><?=$p->nama_profesi?></option>
+                                          <option value="<?=$p->id_jabatan?>"><?=$p->nama_profesi?></option>
                                           <?php
                                           }
                                         ?>
@@ -295,13 +292,55 @@
 <!-- DataTables -->
 <script src="<?php echo base_url('assets/')?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/')?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?=base_url('assets/')?>js/sweetalert/sweetalert.min.js"></script>
 
 <script>
   $(function (){
     $('#dynamic-table').DataTable()
   });
+        window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove(); 
+        });
+      }, 2000);
+
 </script>
-<script type="text/javascript">
+<script>
+      function hapusData(id) {
+        $.ajax({
+          url     : "<?=base_url()?>pegawai/AjaxPegawai",
+          method  : "post",
+          data    : {id:id},
+          success : function(data) {
+            swal({
+              title               : "Apakah Anda Yakin?",
+              text                : 'Anda Ingin Menghapus Pegawai "'+data+'"?',
+              type                : "warning",
+              showCancelButton    : true,
+              confirmButtonColor  : "#DD6B55",
+              confirmButtonText   : "Ya",
+              cancelButtonText    : "Tidak",
+              closeOnConfirm      : false,
+              closeOnCancel       : true
+            },
+            function (isConfirm) {
+              if (isConfirm) {
+                swal({
+                  title             : "Dihapus!",
+                  text              : "Data Sukses Dihapus.",
+                  timer             : 1500,
+                  type              : "success",
+                  showConfirmButton : false
+                }, function () {
+                  window.location.href = "<?=base_url()?>pegawai/HapusPegawai/"+id;
+                });
+              }
+            });
+          }
+        });
+      }
+</script>
+<!-- <script type="text/javascript">
 $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
     var form_data = {
         NIP: $('#NIP').val(),
@@ -310,7 +349,7 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
         idGP: $('#idGP').val()
     };
     $.ajax({
-        url: "<?php echo base_url('pegawai/tambahPegawai'); ?>",
+        url: "<?php //echo base_url('pegawai/tambahPegawai'); ?>",
         type: 'POST',
         data: form_data,
         success: function(msg) {
@@ -324,7 +363,7 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
     });
     return false;
 });
-</script>
+</script> -->
 
 </body>
 </html>

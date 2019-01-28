@@ -42,12 +42,12 @@ class PegawaiController extends CI_Controller
     //     ];
     // }
 
-    function tambahPegawai() {
-        $this->form_validation->set_error_delimiters('', '');
-        $this->form_validation->set_rules('NIP', 'NIP', 'required|max_length[3]');
-        $this->form_validation->set_rules('namaPegawai', 'Nama Pegawai', 'required');
-        $this->form_validation->set_rules('idJabatan', 'Jabatan', 'required');
-        $this->form_validation->set_rules('idGP', 'Golongan', 'required');
+    function TambahPegawai() {
+        // $this->form_validation->set_error_delimiters('', '');
+        // $this->form_validation->set_rules('NIP', 'NIP', 'required|max_length[3]');
+        // $this->form_validation->set_rules('namaPegawai', 'Nama Pegawai', 'required');
+        // $this->form_validation->set_rules('idJabatan', 'Jabatan', 'required');
+        // $this->form_validation->set_rules('idGP', 'Golongan', 'required');
         // $pegawai = $this->PegawaiModel;
         // $validation = $this->form_validation;
         // $validation->set_rules($pegawai->rules());
@@ -60,10 +60,10 @@ class PegawaiController extends CI_Controller
         // {
         //         $this->load->view('formsuccess');
         // }
-        if ($this->form_validation->run() == FALSE) {
-            echo validation_errors();
-        }
-        else {
+        // if ($this->form_validation->run() == FALSE) {
+        //     echo validation_errors();
+        // }
+        // else {
 
         if ($this->input->post('tambah') == 'tambah') {
           $nip          = $this->input->post('NIP');
@@ -88,7 +88,42 @@ class PegawaiController extends CI_Controller
           redirect(base_url('pegawai/index'));
         }
       }
-    }
+    // }
+
+    function EditPegawai($id) {
+        if ($this->input->post('edit') == 'edit') {
+          $nip          = $this->input->post('NIP');
+          $namaPegawai  = $this->input->post('namaPegawai');
+          $idJabatan    = $this->input->post('idJabatan');
+          $idGP         = $this->input->post('idGP');
+          $input        = array(
+                                'nip'           => $nip,
+                                'nama_pegawai'  => $namaPegawai,
+                                'id_jabatan'    => $idJabatan,
+                                'id_gp'         => $idGP
+                          );
+          $this->PegawaiModel->updateData('pegawai', $input, 'nip', $id);
+          $this->session->set_flashdata('message', 'Data Sukses Diperbarui');
+          redirect(base_url('pegawai/index'));
+        } else {
+          redirect(base_url('pegawai/index'));
+        }
+      }
+
+      function AjaxPegawai() {
+        $output = '';
+        $id     = $this->input->post('id');
+        $query  = $this->db->select('*')->from('pegawai')->where('nip = "'.$id.'"')->get()->row();
+        if ($query == true) {
+          $output .= $query->nama_pegawai;
+        }
+        echo $output;
+      }
+
+      function HapusPegawai($id) {
+        $this->PegawaiModel->hapusData('pegawai', 'nip', $id);
+        redirect(base_url('pegawai/index'));
+      }
     
 }
 

@@ -20,6 +20,7 @@
     <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets')?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/icon_image/surat2.png')?>"/>
+  <link href="<?=base_url('assets/')?>css/sweetalert/sweetalert.css" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
