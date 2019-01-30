@@ -30,6 +30,7 @@
             <li><a href="<?php echo base_url('transportasi/index')?>"><i class="fa fa-circle-o"></i> Data Transportasi</a></li>
           </ul>
         </li>
+        <li><a href="#"><i class="fa fa-envelope-o"></i> <span>SPPD</span></a></li>
         <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
@@ -39,13 +40,12 @@
     </section>
     <!-- /.sidebar -->
     <script>
-
-        var url = window.location;
+    var url = window.location;
 // Will only work if string in href matches with location
-$('.treeview-menu a[href="'+ url +'"]').parent().addClass('active');
+    $('.sidebar-menu a[href="'+ url +'"]').parent().addClass('active');
 
 // Will also work for relative and absolute hrefs
-$('.treeview-menu a').filter(function() {
-    return this.href == url;
-}).parent().addClass('active');
+    $('.sidebar-menu a').filter(function() {
+        return this.href == url;
+    }).parent().addClass('active');
     </script>

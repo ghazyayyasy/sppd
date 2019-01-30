@@ -45,7 +45,7 @@
                       <h4 class="modal-title">Tambah Data Pegawai</h4>
                     </div>
                     <div class="modal-body">
-                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/TambahPegawai')?>">
+                      <form class="form-horizontal" role="form" id="urlTambah" method="post" action="<?=base_url('pegawai/TambahPegawai')?>">
                         <div class="form-group">
                           <label class="col-lg-3 col-sm-3 control-label">NIP</label>
                           <div class="col-lg-9">
@@ -62,7 +62,7 @@
                           <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
                           <div class="col-lg-9">
                             <select name="idJabatan" id="idJabatan" class="form-control" required>
-                              <option>- Pilih Jabatan -</option>
+                              <option value="" disabled selected>- Pilih Jabatan -</option>
                               <?php
                               foreach ($jabatan as $d) {
                               ?>
@@ -77,7 +77,7 @@
                           <label class="col-lg-3 col-sm-3 control-label">GP</label>
                           <div class="col-lg-9">
                             <select name="idGP" id="idGP" class="form-control" required>
-                              <option>- Pilih GP -</option>
+                              <option value="" disabled selected>- Pilih GP -</option>
                               <?php
                               foreach ($gp as $d) {
                               ?>
@@ -88,9 +88,10 @@
                             </select>
                           </div>
                         </div>
+                        <div id="alert-msg"> </div>
                         <div class="form-group">
                           <div class="col-lg-offset-3 col-lg-9">
-                            <button type="submit" class="btn btn-primary" name="tambah" value="tambah">Kirim</button>
+                            <button type="submit" class="btn btn-primary" id="addButton" name="tambah" value="tambah">Kirim</button>
                           </div>
                         </div>
                       </form>
@@ -340,8 +341,10 @@
         });
       }
 </script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
+    var url = document.getElementById("urlTambah").action ; 
+    console.log(url);
     var form_data = {
         NIP: $('#NIP').val(),
         namaPegawai: $('#namaPegawai').val(),
@@ -349,7 +352,7 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
         idGP: $('#idGP').val()
     };
     $.ajax({
-        url: "<?php //echo base_url('pegawai/tambahPegawai'); ?>",
+        url: "<?php echo base_url('pegawai/tambahPegawai'); ?>",
         type: 'POST',
         data: form_data,
         success: function(msg) {
@@ -358,23 +361,38 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
             // else if (msg == 'NO')
             //     $('#alert-msg').html('<div class="alert alert-danger text-center">Error in sending your message! Please try again later.</div>');
             // else
+            if (msg == "Sukses"){
+              location.reload();
+            }
+            else{
                 $('#alert-msg').html('<div class="alert alert-danger">' + msg + '</div>');
+            }
         }
     });
     return false;
 });
-</script> -->
+</script>
 
 </body>
 </html>
-<script>
+<script> // buat sidebar active 
+    var url = window.location;
+    // Will only work if string in href matches with location
+    $('.treeview-menu a[href="'+ url +'"]').parent().addClass('active');
 
-var url = window.location;
+    // Will also work for relative and absolute hrefs
+    $('.treeview-menu a').filter(function() {
+    return this.href == url;
+    }).parent().addClass('active');
+</script>
+
+    <script>
+    var url = window.location;
 // Will only work if string in href matches with location
-$('.treeview-menu a[href="'+ url +'"]').parent().addClass('active');
+    $('.sidebar-menu a[href="'+ url +'"]').parent().addClass('active');
 
 // Will also work for relative and absolute hrefs
-$('.treeview-menu a').filter(function() {
-return this.href == url;
-}).parent().addClass('active');
-</script>
+    $('.sidebar-menu a').filter(function() {
+        return this.href == url;
+    }).parent().addClass('active');
+    </script>
