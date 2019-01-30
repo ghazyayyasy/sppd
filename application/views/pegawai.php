@@ -152,7 +152,7 @@
                     <?php
                     foreach ($pegawai as $d) {
                     ?>
-                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modalEditData<?=$d->nip?>" class="modal fade">
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modalEditData<?=$d->nip?>" class="modal fade edit">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -160,23 +160,23 @@
                                 <h4 class="modal-title">Edit Data Pegawai</h4>
                               </div>
                               <div class="modal-body">
-                                <form class="form-horizontal" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
+                                <form class="form-horizontal" id="urlEdit" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">NIP</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="NIP" id="NIP" class="form-control" placeholder="NIP" value="<?=$d->nip?>" required>
+                                      <input type="text" name="NIP3" id="NIP3" class="form-control" placeholder="NIP" value="<?=$d->nip?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Nama Pegawai</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="namaPegawai" id="namaPegawai" class="form-control" placeholder="Nama Pegawai" value="<?=$d->nama_pegawai?>" required>
+                                      <input type="text" name="namaPegawai3" id="namaPegawai3" class="form-control" placeholder="Nama Pegawai" value="<?=$d->nama_pegawai?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
                                     <div class="col-lg-9">
-                                      <select name="idJabatan" id="idJabatan" class="form-control" required>
+                                      <select name="idJabatan3" id="idJabatan3" class="form-control" required>
                                         <option>- Pilih Jabatan -</option>
                                         <?php
                                         foreach ($jabatan as $p) {
@@ -199,7 +199,7 @@
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">GP</label>
                                     <div class="col-lg-9">
-                                      <select name="idGP" id="idGP" class="form-control" required>
+                                      <select name="idGP3" id="idGP3" class="form-control" required>
                                         <option>- Pilih GP -</option>
                                         <?php
                                         foreach ($gp as $g) {
@@ -219,9 +219,10 @@
                                       </select>
                                     </div>
                                   </div>
+                                  <div class="percobaanEdit"></div>
                                   <div class="form-group">
                                     <div class="col-lg-offset-3 col-lg-9">
-                                      <button type="submit" class="btn btn-primary" name="edit" value="edit">Update</button>
+                                      <button type="submit" class="btn btn-primary edit" name="edit" value="edit">Update</button>
                                     </div>
                                   </div>
                                 </form>
@@ -343,8 +344,9 @@
 </script>
 <script type="text/javascript">
 $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
-    var url = document.getElementById("urlTambah").action ; 
-    console.log(url);
+
+    var urlTambah = document.getElementById("urlTambah").action;
+    console.log(urlTambah);
     var form_data = {
         NIP: $('#NIP').val(),
         namaPegawai: $('#namaPegawai').val(),
@@ -372,7 +374,49 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
     return false;
 });
 </script>
+<script type="text/javascript">
+// var editButton = document.getElementsByTagName("")
+$('.btn.btn-primary.edit').click(function() {// aku nggawe iki sedino nggliyeng :(
+    // event.stopPropagation();
+    // event.stopImmediatePropagation();
+    var cek = document.getElementsByClassName("btn btn-primary edit");
+    console.log(cek);
 
+    var urlEdit = document.getElementById("urlEdit").action;
+    console.log(urlEdit);
+    var form_data = {
+        NIP: $('#NIP3').val(),
+        namaPegawai: $('#namaPegawai3').val(),
+        idJabatan: $('#idJabatan3').val(),
+        idGP: $('#idGP3').val()
+    };
+    $.ajax({
+        url: urlEdit,
+        type: 'POST',
+        data: form_data,
+        success: function(msg) {
+            // if (msg == 'YES')
+            //     $('#alert-msg').html('<div class="alert alert-success text-center">Your mail has been sent successfully!</div>');
+            // else if (msg == 'NO')
+            //     $('#alert-msg').html('<div class="alert alert-danger text-center">Error in sending your message! Please try again later.</div>');
+            // else
+            if (msg == "Sukses"){
+              location.reload();
+            }
+            else{
+                $('.percobaanEdit').html('<div class="alert alert-danger">' + msg + '</div>');
+            }
+        }
+    });
+    return false;
+});
+</script>
+<script>
+    $('.modal.fade.edit').on('hidden.bs.modal', function () {
+    // do something…
+    $( ".alert.alert-danger" ).remove();
+})
+</script>
 </body>
 </html>
 <script> // buat sidebar active 

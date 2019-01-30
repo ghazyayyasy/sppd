@@ -93,7 +93,18 @@ class PegawaiController extends CI_Controller
     // }
 
     function EditPegawai($id) {
-        if ($this->input->post('edit') == 'edit') {
+
+      $this->form_validation->set_error_delimiters('', '');
+      $this->form_validation->set_rules('NIP', 'NIP', 'required|numeric|max_length[18]|is_unique[pegawai.nip]');
+      $this->form_validation->set_rules('namaPegawai', 'Nama Pegawai', 'required|alpha');
+      $this->form_validation->set_rules('idJabatan', 'Jabatan', 'required');
+      $this->form_validation->set_rules('idGP', 'Golongan', 'required');
+
+      if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+     }
+     else {
+        
           $nip          = $this->input->post('NIP');
           $namaPegawai  = $this->input->post('namaPegawai');
           $idJabatan    = $this->input->post('idJabatan');
@@ -106,10 +117,11 @@ class PegawaiController extends CI_Controller
                           );
           $this->PegawaiModel->updateData('pegawai', $input, 'nip', $id);
           $this->session->set_flashdata('message', 'Data Sukses Diperbarui');
-          redirect(base_url('pegawai/index'));
-        } else {
-          redirect(base_url('pegawai/index'));
+          // redirect(base_url('pegawai/index'));
+          echo "Sukses";
+
         }
+      
       }
 
       function AjaxPegawai() {
