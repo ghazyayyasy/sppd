@@ -45,7 +45,7 @@
                       <h4 class="modal-title">Tambah Data Golongan</h4>
                     </div>
                     <div class="modal-body">
-                      <form class="form-horizontal" role="form" method="post" action="<?=base_url('gp/TambahGP')?>">
+                      <form class="form-horizontal" role="form" id="urlTambah" method="post" action="<?=base_url('gp/TambahGP')?>">
                         <div class="form-group">
                           <label class="col-lg-3 col-sm-3 control-label">Nama GP</label>
                           <div class="col-lg-9">
@@ -58,9 +58,10 @@
                             <input type="text" name="tarif" id="tarif" class="form-control" placeholder="Tarif" required>
                           </div>
                         </div>
+                        <div id="alert-msg"> </div>
                         <div class="form-group">
                           <div class="col-lg-offset-3 col-lg-9">
-                            <button type="submit" class="btn btn-primary" name="tambah" value="tambah">Kirim</button>
+                            <button type="submit" class="btn btn-primary" id="addButton" name="tambah" value="tambah">Kirim</button>
                           </div>
                         </div>
                       </form>
@@ -225,6 +226,38 @@
       }, 2000);
 
 </script>
+<script type="text/javascript">
+$('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
+
+    var urlTambah = document.getElementById("urlTambah").action;
+    console.log(urlTambah);
+    var form_data = {
+        namaGP: $('#namaGP').val(),
+        tarif: $('#tarif').val(),
+        
+    };
+    $.ajax({
+        url: "<?php echo base_url('gp/TambahGP'); ?>",
+        type: 'POST',
+        data: form_data,
+        success: function(msg) {
+            // if (msg == 'YES')
+            //     $('#alert-msg').html('<div class="alert alert-success text-center">Your mail has been sent successfully!</div>');
+            // else if (msg == 'NO')
+            //     $('#alert-msg').html('<div class="alert alert-danger text-center">Error in sending your message! Please try again later.</div>');
+            // else
+            if (msg == "Sukses"){
+              location.reload();
+            }
+            else{
+                $('#alert-msg').html('<div class="alert alert-danger">' + msg + '</div>');
+            }
+        }
+    });
+    return false;
+});
+</script>
+
 <script>
      function hapusData(id) {
         $.ajax({

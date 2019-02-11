@@ -1,20 +1,25 @@
 <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?php echo base_url('assets/')?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
+      <div class="col-sm-5">
+      <div class="pull-left image">
+          <img src="<?=base_url('assets/icon_image/icon_kebumen.png')?>" style="max-width:70px;height:auto;" alt="User Image">  
+      </div>
+      </div>
+      <div class="col-sm-7">
+      <div class="pull-left info">
+          <p style="color:white;margin-left:4px;"><?=$this->session->userdata('namaUser')?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
+      </div>
+      
       </div>
       <!-- search form -->
       
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header"><b><center>Menu<center></b></li>
         <li><a href="<?php echo base_url('dashboard/index')?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="active treeview menu-open">
           <a href="#">
@@ -30,7 +35,7 @@
             <li><a href="<?php echo base_url('transportasi/index')?>"><i class="fa fa-circle-o"></i> Data Transportasi</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-envelope-o"></i> <span>SPPD</span></a></li>
+        <li><a href="<?php echo base_url('datasppd/index')?>"><i class="fa fa-envelope-o"></i> <span>SPPD</span></a></li>
         <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

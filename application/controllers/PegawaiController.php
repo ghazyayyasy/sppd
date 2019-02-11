@@ -94,8 +94,16 @@ class PegawaiController extends CI_Controller
 
     function EditPegawai($id) {
 
+
+      if($this->input->post('NIP') != $id) { // ini cek valid id nya dulu biar gak tabrakan sama diri sendiri
+        $is_unique =  '|is_unique[pegawai.nip]';
+     } else {
+        $is_unique =  '';
+     }
+     
+      //  $this->form_validation->set_rules('user_name', 'User Name', 'required|trim|xss_clean'.$is_unique);
       $this->form_validation->set_error_delimiters('', '');
-      $this->form_validation->set_rules('NIP', 'NIP', 'required|numeric|max_length[18]|is_unique[pegawai.nip]');
+      $this->form_validation->set_rules('NIP', 'NIP', 'required|numeric|max_length[18]'.$is_unique);
       $this->form_validation->set_rules('namaPegawai', 'Nama Pegawai', 'required|alpha');
       $this->form_validation->set_rules('idJabatan', 'Jabatan', 'required');
       $this->form_validation->set_rules('idGP', 'Golongan', 'required');

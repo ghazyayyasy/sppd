@@ -52,9 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
-            <label>
+            <!-- <label>
               <input type="checkbox"> Ingat Saya
-            </label>
+            </label> -->
           </div>
         </div>
         <!-- /.col -->

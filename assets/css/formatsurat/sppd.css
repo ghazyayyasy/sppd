@@ -1,0 +1,186 @@
+  /** For screen preview **/
+  @media screen {
+    page { background: #e0e0e0 }
+    page {
+      background: white;
+      margin: 5mm auto;
+    }
+  }
+  @media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
+  }
+    page {
+      background: white;
+      display: block;
+      margin-bottom: 0.5cm;
+      overflow: visible;
+      position: relative;
+      box-sizing: border-box;
+      font-size: 1em;
+      font-family: "Times New Roman", Times, serif;
+    }
+    page[size="A4"] {  
+      width: 210mm;
+      height: 296mm;
+    }
+    page[size="A4"][layout="landscape"] {
+      width: 297mm;
+      height: 209mm;
+    }
+    page[size="A3"] {
+      width: 297mm;
+      height: 419mm;
+    }
+    page[size="A3"][layout="landscape"] {
+      width: 420mm;
+      height: 296mm;
+    }
+    page[size="A5"] {
+      width: 148mm; 
+      height: 209mm;
+    }
+    page[size="A5"][layout="landscape"] {
+      width: 210mm;
+      height: 147mm;
+    }
+  
+    page[size="letter"] {
+      width: 216mm;
+      height: 279mm;
+    }
+    page[size="letter"][layout="landscape"] {
+      width: 280mm; 
+      height: 215mm;
+    }
+  
+    page[size="legal"] {
+      width: 216mm;
+      height: 356mm;
+    }
+  
+    page[size="legal"][layout="landscape"] {
+      width: 357mm;
+      height: 215mm;
+    }
+  
+    page[size="f4"] {
+      width: 216mm;
+      height: 320mm;
+    }
+  
+    page[size="f4"][layout="landscape"] {
+      width: 320mm;
+      height: 216mm;
+    }
+  
+   
+  
+      /** Padding area **/
+  .padding-10mm { padding: 10mm }
+  .padding-15mm { padding: 15mm }
+  .padding-20mm { padding: 20mm }
+  .padding-25mm { padding: 25mm }
+  
+  .align-center {
+    text-align: center;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .f20 {
+    font-size: 20pt;
+  }
+  
+  .f18 {
+    font-size: 18pt;
+  }
+  
+  .f16 {
+    font-size: 16pt;
+  }
+  
+  .f14 {
+    font-size: 14pt;
+  }
+  
+  .f12 {
+    font-size: 12pt;
+  }
+  
+  .f11 {
+    font-size: 11pt;
+  }
+  
+  .f10 {
+    font-size: 10pt;
+  }
+  
+  .garis5p {
+    border-bottom: 5px solid #000000;
+  }
+  
+  .garis1p {
+    margin-top: 1px;
+    border-bottom: 1px solid #000000;
+  }
+  
+  
+  .content {
+    line-height: 1.5;
+  }
+  
+  .ind {
+    text-indent: 50px;
+  }
+  
+  .ind2 {
+    text-indent: 0px;
+  }
+  
+  #footer {
+    position:fixed;
+    left:0;
+    bottom:0;
+  }
+  #footerback,
+  #footernext {
+    text-align: center;        
+    width: 50px;
+    float: left;
+    border: 1px solid black;      
+  }
+  
+  .mainTable {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .mainTable td, .mainTable tr {
+    border: 1px solid black;
+    padding: 3px;
+  }
+  
+  #customers2 {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers2 td, #customers2 th {
+    border: 1px solid black;
+    padding: 0px;
+  }
+  
+  @media print {
+      
+    body, page {
+      margin: 0;
+      box-shadow: 0;
+    }
+  
+  }
+  
+  
+  

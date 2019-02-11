@@ -64,3 +64,5 @@ $route['jabatan/(:any)'] = 'JabatanController/$1';
 $route['jabatan/(:any)/(:any)'] = 'JabatanController/$1/$2';
 $route['transportasi/(:any)'] = 'TransportasiController/$1';
 $route['transportasi/(:any)/(:any)'] = 'TransportasiController/$1/$2';
+$route['datasppd/(:any)'] = 'DataSPPDController/$1';
+$route['datasppd/(:any)/(:any)'] = 'DataSPPDController/$1/$2';

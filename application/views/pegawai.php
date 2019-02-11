@@ -160,23 +160,23 @@
                                 <h4 class="modal-title">Edit Data Pegawai</h4>
                               </div>
                               <div class="modal-body">
-                                <form class="form-horizontal" id="urlEdit" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
+                                <form class="form-horizontal edit" id="urlEdit<?=$d->nip?>" role="form" method="post" action="<?=base_url('pegawai/EditPegawai/'.$d->nip)?>">
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">NIP</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="NIP3" id="NIP3" class="form-control" placeholder="NIP" value="<?=$d->nip?>" required>
+                                      <input type="text" name="NIP<?=$d->nip?>" id="NIP<?=$d->nip?>" class="form-control nip" placeholder="NIP" value="<?=$d->nip?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Nama Pegawai</label>
                                     <div class="col-lg-9">
-                                      <input type="text" name="namaPegawai3" id="namaPegawai3" class="form-control" placeholder="Nama Pegawai" value="<?=$d->nama_pegawai?>" required>
+                                      <input type="text" name="namaPegawai<?=$d->nip?>" id="namaPegawai<?=$d->nip?>" class="form-control nama" placeholder="Nama Pegawai" value="<?=$d->nama_pegawai?>" required>
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">Jabatan</label>
                                     <div class="col-lg-9">
-                                      <select name="idJabatan3" id="idJabatan3" class="form-control" required>
+                                      <select name="idJabatan<?=$d->nip?>" id="idJabatan<?=$d->nip?>" class="form-control jabatan" required>
                                         <option>- Pilih Jabatan -</option>
                                         <?php
                                         foreach ($jabatan as $p) {
@@ -199,7 +199,7 @@
                                   <div class="form-group">
                                     <label class="col-lg-3 col-sm-3 control-label">GP</label>
                                     <div class="col-lg-9">
-                                      <select name="idGP3" id="idGP3" class="form-control" required>
+                                      <select name="idGP<?=$d->nip?>" id="idGP<?=$d->nip?>" class="form-control gp" required>
                                         <option>- Pilih GP -</option>
                                         <?php
                                         foreach ($gp as $g) {
@@ -222,7 +222,7 @@
                                   <div class="percobaanEdit"></div>
                                   <div class="form-group">
                                     <div class="col-lg-offset-3 col-lg-9">
-                                      <button type="submit" class="btn btn-primary edit" name="edit" value="edit">Update</button>
+                                      <button type="submit" id="editButton<?=$d->nip?>" class="btn btn-primary edit" name="edit" value="edit">Update</button>
                                     </div>
                                   </div>
                                 </form>
@@ -376,19 +376,39 @@ $('#addButton').click(function() {// aku nggawe iki sedino nggliyeng :(
 </script>
 <script type="text/javascript">
 // var editButton = document.getElementsByTagName("")
-$('.btn.btn-primary.edit').click(function() {// aku nggawe iki sedino nggliyeng :(
+    // var editButton = document.getElementsByClassName("btn btn-primary edit")[0];
+    
+    var editButton = document.getElementsByClassName("btn btn-primary edit");
+
+    // for(var i = 0; i< editButton.length; i++) {
+    //   var editan = editButton[i].id;
+    
+    
+$('.btn.btn-primary.edit').each(function(index) {// aku nggawe iki sedino nggliyeng :(
+
+      $(this).on("click", function(){
+    // for( var i = 0; i< editButton.length; i++){
     // event.stopPropagation();
     // event.stopImmediatePropagation();
+    // event.preventDefault();
     var cek = document.getElementsByClassName("btn btn-primary edit");
-    console.log(cek);
+    // console.log(cek);
+    var nipEdit = document.getElementsByClassName("form-control nip")[index].id;
+    var namaEdit = document.getElementsByClassName("form-control nama")[index].id;
+    var jabatanEdit = document.getElementsByClassName("form-control jabatan")[index].id;
+    var gpEdit = document.getElementsByClassName("form-control gp")[index].id;
+    console.log(nipEdit);
 
-    var urlEdit = document.getElementById("urlEdit").action;
+    // var urlEdit = document.getElementById("urlEdit").action;
+    var b = document.getElementsByClassName("form-horizontal edit")[index].id;
+    var urlEdit = document.getElementById(b).action;
     console.log(urlEdit);
+    
     var form_data = {
-        NIP: $('#NIP3').val(),
-        namaPegawai: $('#namaPegawai3').val(),
-        idJabatan: $('#idJabatan3').val(),
-        idGP: $('#idGP3').val()
+        NIP: $('#'+nipEdit).val(),
+        namaPegawai: $('#'+namaEdit).val(),
+        idJabatan: $('#'+jabatanEdit).val(),
+        idGP: $('#'+gpEdit).val()
     };
     $.ajax({
         url: urlEdit,
@@ -409,14 +429,26 @@ $('.btn.btn-primary.edit').click(function() {// aku nggawe iki sedino nggliyeng 
         }
     });
     return false;
+    // }
+  });
 });
-</script>
-<script>
+// }
     $('.modal.fade.edit').on('hidden.bs.modal', function () {
+      
     // do something…
+    // $('.form-control.nip input[type="text"]').val('');
+    // $('.form-control.nama input[type="text"]').val('');
+    // $('.form-control.jabatan input[type="text"]').val('');
+    // $('.form-control.gp input[type="text"]').val('');
+    $('input[name=checkListItem').val('');
     $( ".alert.alert-danger" ).remove();
+    
+    
+    
+    
 })
 </script>
+
 </body>
 </html>
 <script> // buat sidebar active 
