@@ -1,17 +1,19 @@
 <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
-      <div class="col-sm-5">
+      
+    
+      
       <div class="pull-left image">
           <img src="<?=base_url('assets/icon_image/icon_kebumen.png')?>" style="max-width:70px;height:auto;" alt="User Image">  
       </div>
-      </div>
-      <div class="col-sm-7">
-      <div class="pull-left info">
-          <p style="color:white;margin-left:4px;"><?=$this->session->userdata('namaUser')?></p>
+      
+     
+      <div class="pull-left info" style="margin-left:35px;">
+          <p style="color:white;margin-left:5px;"><?=$this->session->userdata('namaUser')?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
-      </div>
+      
       
       </div>
       <!-- search form -->
